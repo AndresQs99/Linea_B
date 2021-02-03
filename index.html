@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.js "></script>
+    <link rel="stylesheet" href=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+    <style>
+        #map {
+            width: 100%;
+            height: 580px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map'>
+    </div>
+    <script>
+        var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+                + 'contributors',
+            maxZoom: 18
+        });
+
+
+        var map = L.map('map', {
+            center: [1.61438, -75.60623],
+            layers: OSM,
+            zoom: 14,
+            scrollWheelZoom: false
+        });
+        L.control.scale().addTo(map);
+
+        //Añadir un marcador
+        var uniamazonia = L.marker([1.6201211710589796, -75.6051862589447], {
+            draggable: true,
+        }).addTo(map)
+            .bindPopup('Universidad de la Amazonia')
+            .openPopup();
+
+        var alcaldia = L.marker([1.6150618, -75.6138462], {
+            draggable: true,
+        }).addTo(map)
+            .bindPopup('Alcaldía de Florencia');
+
+
+        var plaza = L.marker([1.6151283, -75.61328329], {
+            draggable: true,
+        }).addTo(map)
+            .bindPopup('Plaza Santander');
+
+
+        //Añadir un círculo
+        var circle = L.circle([1.615061, -75.613846], 500, {
+            color: 'blue',
+            fillColor: '#5DADE2',
+            fillOpacity: 0.5
+        }).addTo(map);
+
+
+        var polygon = L.polygon([
+            [1.6145080, -75.613510],
+            [1.6151819, -75.613707],
+            [1.6153937, -75.613036],
+            [1.6147033, -75.612807]
+
+        ]).addTo(map)
+            .bindPopup('Plaza Santander');
+
+
+        var pointA = new L.LatLng(1.62124199301633, -75.62024295319335);
+        var pointB = new L.LatLng(1.6208988076739637, -75.6196314095665);
+        var pointC = new L.LatLng(1.6209470681162528, -75.61863899227728);
+        var pointD = new L.LatLng(1.6195099788893965, -75.61803281306143);
+        var pointE = new L.LatLng(1.6204403334121253, -75.61387404806698);
+        var pointF = new L.LatLng(1.6206387374881825, -75.61034962545995);
+        var pointG = new L.LatLng(1.6203304066902455, -75.60950975134487);
+        var pointH = new L.LatLng(1.6194590371430766, -75.60706089449637);
+        var pointI = new L.LatLng(1.6188477376734864, -75.6064520330784);
+        var pointJ = new L.LatLng(1.6201211710589796, -75.6051862589447);
+        var latlngs = [pointA, pointB, pointC, pointD, pointE, pointF, pointG, pointH, pointI, pointJ];
+        var polyline = L.polyline(
+            latlngs, { color: 'red' }
+        )
+            .addTo(map)
+            .bindPopup('Ruta Vivienda-Universidad');
+
+
+    </script>
+</body>
+
+</html>
